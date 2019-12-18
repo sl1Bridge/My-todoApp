@@ -7,28 +7,18 @@ import Input from "@material-ui/core/Input";
 import Typography from "@material-ui/core/Typography";
 import Check from "@material-ui/icons/Check";
 import IconButton from '@material-ui/core/IconButton';
-import axios from "axios";
+import {removeTodo, checkTodo, changeTodoTitle} from "../../api";
 
 function TodoComponent(props) {
 	const [newTitle, setNewTitle] = React.useState(props.title);
 	const [isShowInput, setIsShowInput] = React.useState(false);
 	
 	const handleChange = event => {
-		// props.onCheckTodo(props.id, event.target.checked);
-		const checkTodo = {
-			title: props.title,
-			checked: event.target.checked
-		};
-
-		axios.put(`http://localhost:3000/todos/${props.id}`, checkTodo)
-			.then(() => props.loadTodos())
-			.catch(e => console.log(e))
+		checkTodo(props, event);
 	};
 
 	const handleClick = () => {
-		axios.delete(`http://localhost:3000/todos/${props.id}`)
-			.then(() => props.loadTodos())
-			.catch(e => console.log(e))
+		removeTodo(props);
 	};
 
 	const onClickShowInput = () => {
@@ -40,17 +30,7 @@ function TodoComponent(props) {
 	};
 
 	const onCLickSaveTitle = () => {
-		const changeTitle = {
-			title: newTitle,
-			checked: props.checked,
-		};
-
-		axios.put(`http://localhost:3000/todos/${props.id}`, changeTitle)
-			.then(() => {
-				props.loadTodos();
-				setIsShowInput(false);
-			})
-			.catch(e => console.log(e))
+		changeTodoTitle(props, setIsShowInput, newTitle);
 	};
 
 	return (

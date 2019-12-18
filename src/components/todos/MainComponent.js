@@ -3,9 +3,10 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import AddTodoComponent from "./AddTodoComponent";
 import TodoListComponent from "./TodoListComponent";
-import axios from "axios";
+import {getTodoList} from "../../api";
 
 import imgUrl from '../../img/backImg.png';
+
 
 
 // ГЛАВНЫЙ КОМПОНЕНТ, В КОТОРОМ ХРАНИТСЯ СПИСОК ДЕЛ
@@ -27,23 +28,11 @@ class MainComponent extends React.Component {
 	}
 
 	componentDidMount() {
-		axios.get('http://localhost:3000/todos')
-			.then(({data}) => {
-				this.setState({
-					listTodo: data,
-				})
-			})
-			.catch(e => console.log(e));
+		getTodoList(this)
 	}
 
 	loadTodos() {
-		axios.get('http://localhost:3000/todos')
-			.then(({data}) => {
-				this.setState({
-					listTodo: data,
-				})
-			})
-			.catch(e => console.log(e));
+		getTodoList(this)
 	}
 
 	render() {
