@@ -3,6 +3,7 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import AddTodoComponent from "./AddTodoComponent";
 import TodoListComponent from "./TodoListComponent";
+import axios from "axios";
 
 import imgUrl from '../../img/backImg.png';
 
@@ -28,34 +29,25 @@ class MainComponent extends React.Component {
 	}
 
 	componentDidMount() {
-		fetch('http://localhost:3000/todos', {
-			method: 'GET'
-		}).then(response => response.json())
-			.then((res) => {
+		axios.get('http://localhost:3000/todos')
+			.then(({data}) => {
 				this.setState({
-					listTodo: res
-				});
-			} )
-			.catch(error => {
-				console.log(error);
-			});
+					listTodo: data,
+				})
+			})
+			.catch(e => console.log(e));
 	}
 
 	loadTodos() {
-		fetch('http://localhost:3000/todos', {
-			method: 'GET'
-		}).then(response => response.json())
-			.then((res) => {
+		axios.get('http://localhost:3000/todos')
+			.then(({data}) => {
 				this.setState({
-					listTodo: res
-				});
-			} )
-			.catch(error => {
-				console.log(error);
-			});
+					listTodo: data,
+				})
+			})
+			.catch(e => console.log(e));
 	}
 
-	// описываем работу функции по удалению элементов из списока
 	removeTodo(id) {
 		this.setState({
 			listTodo: this.state.listTodo.filter(todo => todo.id !== id)

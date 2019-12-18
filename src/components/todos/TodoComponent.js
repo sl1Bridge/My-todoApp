@@ -7,44 +7,28 @@ import Input from "@material-ui/core/Input";
 import Typography from "@material-ui/core/Typography";
 import Check from "@material-ui/icons/Check";
 import IconButton from '@material-ui/core/IconButton';
+import axios from "axios";
 
 function TodoComponent(props) {
 	const [newTitle, setNewTitle] = React.useState(props.title);
 	const [isShowInput, setIsShowInput] = React.useState(false);
 	
 	const handleChange = event => {
-		console.log(event.target.checked);
 		// props.onCheckTodo(props.id, event.target.checked);
-		fetch(`http://localhost:3000/todos/${props.id}`, {
-			method: 'PUT',
-			headers: {'Content-Type':'application/json'},
-			body: JSON.stringify({
-				title: props.title,
-				checked: event.target.checked
-			})
-		})
-			.then(res => {
-				if (res.status === 200) {
-					props.loadTodos();
-				}
-			})
-			.catch(e => {
-				console.log(e);
-			});
+		const checkTodo = {
+			title: props.title,
+			checked: event.target.checked
+		};
+
+		axios.put(`http://localhost:3000/todos/${props.id}`, checkTodo)
+			.then(() => props.loadTodos())
+			.catch(e => console.log(e))
 	};
 
 	const handleClick = () => {
-		fetch(`http://localhost:3000/todos/${props.id}`, {
-			method: 'DELETE'
-		})
-			.then(res => {
-				if (res.status === 200) {
-					props.loadTodos();
-				}
-			})
-			.catch(e => {
-				console.log(e);
-			});
+		axios.delete(`http://localhost:3000/todos/${props.id}`)
+			.then(() => props.loadTodos())
+			.catch(e => console.log(e))
 	};
 
 	const onClickShowInput = () => {
@@ -56,25 +40,17 @@ function TodoComponent(props) {
 	};
 
 	const onCLickSaveTitle = () => {
-		fetch(`http://localhost:3000/todos/${props.id}`, {
-			method: 'PUT',
-			headers: {'Content-Type':'application/json'},
-			body: JSON.stringify({
-				title: newTitle,
-				checked: props.checked
-			})
-		})
-			.then(res => {
-				if (res.status === 200) {
-					props.loadTodos();
-				}
-			})
+		const changeTitle = {
+			title: newTitle,
+			checked: props.checked,
+		};
+
+		axios.put(`http://localhost:3000/todos/${props.id}`, changeTitle)
 			.then(() => {
+				props.loadTodos();
 				setIsShowInput(false);
 			})
-			.catch(e => {
-				console.log(e);
-			});
+			.catch(e => console.log(e))
 	};
 
 	return (

@@ -3,7 +3,6 @@ import Grid from "@material-ui/core/Grid";
 import TodoComponent from "./TodoComponent";
 
 function TodoListComponent(props) {
-	// компонент, ответственный за рендер списка дел
 	const {listTodo, onCheckTodo, loadTodos} = props;
 	return (
 		<Grid container
