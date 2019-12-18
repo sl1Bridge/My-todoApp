@@ -3,7 +3,7 @@ import Grid from "@material-ui/core/Grid";
 import TodoComponent from "./TodoComponent";
 
 function TodoListComponent(props) {
-	const {listTodo, onCheckTodo, loadTodos} = props;
+	const {listTodo, loadTodos} = props;
 	return (
 		<Grid container
 		      spacing={8}
@@ -16,7 +16,6 @@ function TodoListComponent(props) {
 				               title={todo.title}
 				               checked={todo.checked}
 				               id={todo.id}
-				               onCheckTodo={onCheckTodo}
 				               loadTodos={loadTodos}
 				/>
 			))}

@@ -24,8 +24,6 @@ class MainComponent extends React.Component {
 		};
 		// определяем контекст вызова функций
 		this.loadTodos = this.loadTodos.bind(this);
-		this.removeTodo = this.removeTodo.bind(this);
-		this.onCheckTodo = this.onCheckTodo.bind(this);
 	}
 
 	componentDidMount() {
@@ -48,27 +46,6 @@ class MainComponent extends React.Component {
 			.catch(e => console.log(e));
 	}
 
-	removeTodo(id) {
-		this.setState({
-			listTodo: this.state.listTodo.filter(todo => todo.id !== id)
-		});
-	}
-
-	onCheckTodo(id, checked) {
-		this.setState({
-			listTodo: this.state.listTodo.map(todo => {
-				if (todo.id === id) {
-					return ({
-						...todo,
-						checked
-					});
-				}
-
-				return todo;
-			})
-		});
-	}
-
 	render() {
 		return (
 			<Grid container
@@ -86,7 +63,6 @@ class MainComponent extends React.Component {
 							 }}
 						>
 							<TodoListComponent listTodo={this.state.listTodo}
-							                   onCheckTodo={this.onCheckTodo}
 							                   loadTodos={this.loadTodos}
 							/>
 						</div>
