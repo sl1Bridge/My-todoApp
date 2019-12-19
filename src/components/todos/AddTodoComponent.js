@@ -25,7 +25,7 @@ class AddTodoComponent extends React.Component {
 
 	handleSubmit(event) {
 		event.preventDefault();
-		addNewTodo(this);
+		addNewTodo.bind(this)();
 	}
 
 	render() {

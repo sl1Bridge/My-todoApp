@@ -28,11 +28,11 @@ class MainComponent extends React.Component {
 	}
 
 	componentDidMount() {
-		getTodoList(this)
+		getTodoList.bind(this)()
 	}
 
 	loadTodos() {
-		getTodoList(this)
+		getTodoList.bind(this)()
 	}
 
 	render() {

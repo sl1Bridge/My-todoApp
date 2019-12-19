@@ -1,33 +1,33 @@
 import axios from "axios";
 
-export function getTodoList(context) {
+export function getTodoList() {
   axios.get('http://localhost:3000/todos')
     .then(({data}) => {
-      context.setState({
+      this.setState({
         listTodo: data,
       })
     })
     .catch(e => console.log(e));
 }
 
-export function addNewTodo(todo) {
+export function addNewTodo() {
   const title = {
-    title: todo.state.titleValue,
+    title: this.state.titleValue,
     checked: false,
   };
 
-  if (todo.state.titleValue) {
+  if (this.state.titleValue) {
     axios.post('http://localhost:3000/todos', title)
-      .then(() => todo.props.loadTodos())
+      .then(() => this.props.loadTodos())
       .catch(e => {
         console.log(e);
       });
 
-    todo.setState({
+    this.setState({
       titleValue: '',
     });
   } else {
-    todo.setState({
+    this.setState({
       isError: true
     });
   }
