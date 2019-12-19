@@ -4,10 +4,9 @@ import Grid from "@material-ui/core/Grid";
 import AddTodoComponent from "./AddTodoComponent";
 import TodoListComponent from "./TodoListComponent";
 import {getTodoList} from "../../api";
+import { connect } from 'react-redux';
 
 import imgUrl from '../../img/backImg.png';
-
-
 
 // ГЛАВНЫЙ КОМПОНЕНТ, В КОТОРОМ ХРАНИТСЯ СПИСОК ДЕЛ
 // И ВСЕ ФУНКЦИИ РАБОТЫ С НИМ
@@ -36,6 +35,7 @@ class MainComponent extends React.Component {
 	}
 
 	render() {
+		console.log(this.props);
 		return (
 			<Grid container
 			      justify="center"
@@ -62,4 +62,10 @@ class MainComponent extends React.Component {
 	}
 }
 
-export default MainComponent;
+const mapStateToProps = (state) => {
+	return {
+		todos: state.listTodo
+	}
+};
+
+export default connect(mapStateToProps)(MainComponent);
