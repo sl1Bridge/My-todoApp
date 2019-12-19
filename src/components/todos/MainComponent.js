@@ -3,7 +3,7 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import AddTodoComponent from "./AddTodoComponent";
 import TodoListComponent from "./TodoListComponent";
-import {getTodoList} from "../../api";
+import {getTodoList, getTodos} from "../../api";
 import { connect } from 'react-redux';
 
 import imgUrl from '../../img/backImg.png';
@@ -27,6 +27,7 @@ class MainComponent extends React.Component {
 	}
 
 	componentDidMount() {
+		getTodos();
 		getTodoList.bind(this)()
 	}
 
@@ -35,7 +36,6 @@ class MainComponent extends React.Component {
 	}
 
 	render() {
-		console.log(this.props);
 		return (
 			<Grid container
 			      justify="center"

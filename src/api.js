@@ -1,4 +1,7 @@
 import axios from "axios";
+import {reduxStore} from "./index";
+import {loadTodoList} from "./store/Actions";
+
 
 export function getTodoList() {
   axios.get('http://localhost:3000/todos')
@@ -8,6 +11,16 @@ export function getTodoList() {
       })
     })
     .catch(e => console.log(e));
+}
+
+export async function getTodos() {
+  const axiosResponse = () => {
+    return axios.get('http://localhost:3000/todos')
+  };
+
+  axiosResponse().then(({data}) => {
+    reduxStore.dispatch(loadTodoList(data))
+  })
 }
 
 export function addNewTodo() {

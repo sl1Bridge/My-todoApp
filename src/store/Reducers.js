@@ -2,13 +2,27 @@ import {ACTION_TODO_LIST_LOADED} from "./Actions";
 
 
 const defaultState = {
-  listTodo: [],
+  listTodo: [
+    /*
+			* id: string
+			* title: string
+			* checked: boolean
+			* */
+  ],
 };
 
 export const rootReducer = (state = defaultState, action) => {
-/*  switch (action.type) {
-    case ACTION_TODO_LIST_LOADED
-  }*/
+  switch (action.type) {
+    case ACTION_TODO_LIST_LOADED:
+    {
+      return {
+        ...state,
+        listTodo: action.payload
+      };
+    }
 
-  return state;
+    default:
+      return state;
+  }
+
 };
