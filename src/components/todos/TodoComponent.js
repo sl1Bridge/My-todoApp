@@ -7,7 +7,7 @@ import Input from "@material-ui/core/Input";
 import Typography from "@material-ui/core/Typography";
 import Check from "@material-ui/icons/Check";
 import IconButton from '@material-ui/core/IconButton';
-import {removeTodo, checkTodo, changeTodoTitle} from "../../api";
+import {checkTodo, changeTodoTitle, deletet, removeTodo} from "../../api";
 import {connect} from "react-redux";
 import {changeTitleText, setTitleInputStatus} from "../../store/actions";
 
@@ -20,6 +20,7 @@ function TodoComponent(props) {
 	};
 
 	const handleClick = () => {
+		deletet(props);
 		removeTodo(props);
 	};
 

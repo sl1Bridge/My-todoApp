@@ -70,10 +70,24 @@ export function createNewTodo() {
   }
 }
 
-export function removeTodo(todo) {
+export function deletet(todo) {
   axios.delete(`http://localhost:3000/todos/${todo.id}`)
     .then(() => todo.loadTodos())
     .catch(e => console.log(e))
+}
+
+export function removeTodo(todo) {
+  function axiosResponse() {
+   return axios.delete(`http://localhost:3000/todos/${todo.id}`)
+  }
+
+  axiosResponse()
+    .then(() => {
+      getTodos()
+    })
+    .catch(e => {
+      console.log(e);
+    });
 }
 
 export function checkTodo(todo, e) {
