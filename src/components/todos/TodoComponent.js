@@ -7,12 +7,12 @@ import Input from "@material-ui/core/Input";
 import Typography from "@material-ui/core/Typography";
 import Check from "@material-ui/icons/Check";
 import IconButton from '@material-ui/core/IconButton';
-import {checkTodo, changeTodoTitle, deletet, removeTodo, check} from "../../api";
+import {checkTodo, changeTodoTitle, deletet, removeTodo, check, changeTitle} from "../../api";
 import {connect} from "react-redux";
 import {changeTitleText, setTitleInputStatus} from "../../store/actions";
 
 function TodoComponent(props) {
-	const [newTitle, setNewTitle] = React.useState(props.title);
+	const [title, setNewTitle] = React.useState(props.title);
 	const [isShowInput, setIsShowInput] = React.useState(false);
 	
 	const handleChange = event => {
@@ -36,8 +36,8 @@ function TodoComponent(props) {
 	};
 
 	const onCLickSaveTitle = () => {
-		props.setTitleInputStatus(false);
-		changeTodoTitle(props, setIsShowInput, newTitle);
+		changeTitle(props, setIsShowInput, title);
+		changeTodoTitle(props);
 	};
 
 	return (
@@ -73,7 +73,7 @@ function TodoComponent(props) {
 					{props.title}
 				</Typography>}
 				{isShowInput &&
-					<Input value={newTitle}
+					<Input value={title}
 						   onChange={onChangeInput}
 						   endAdornment={
 						   		<IconButton onClick={onCLickSaveTitle}>

@@ -1,6 +1,6 @@
 import axios from "axios";
 import {reduxStore} from "./index";
-import {loadTodoList, setTitleText, throwErrorStatus} from "./store/actions";
+import {loadTodoList, setTitleInputStatus, setTitleText, throwErrorStatus} from "./store/actions";
 
 
 export function getTodoList() {
@@ -121,7 +121,7 @@ export function checkTodo(todo, event) {
     })
 }
 
-export function changeTodoTitle(todo, setIsShowInput, newTitle) {
+export function changeTitle(todo, setIsShowInput, newTitle) {
   const changeTitle = {
     title: newTitle,
     checked: todo.checked,
@@ -133,4 +133,24 @@ export function changeTodoTitle(todo, setIsShowInput, newTitle) {
       setIsShowInput(false);
     })
     .catch(e => console.log(e))
+}
+
+export function changeTodoTitle(todo) {
+  const changeTitle = {
+    title: todo.newTitle,
+    checked: todo.checked,
+  };
+
+  function axiosResponse() {
+    return axios.put(`http://localhost:3000/todos/${todo.id}`, changeTitle)
+  }
+
+  axiosResponse()
+    .then(() =>{
+      getTodos();
+      reduxStore.dispatch(setTitleInputStatus(false));
+    })
+    .catch(
+      e => console.log(e)
+    )
 }
