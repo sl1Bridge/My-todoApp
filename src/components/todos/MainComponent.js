@@ -64,7 +64,7 @@ class MainComponent extends React.Component {
 
 const mapStateToProps = (state) => {
 	return {
-		todos: state.listTodo
+		listTodo: state.listTodo
 	}
 };
 

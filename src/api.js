@@ -1,6 +1,6 @@
 import axios from "axios";
 import {reduxStore} from "./index";
-import {loadTodoList} from "./store/Actions";
+import {loadTodoList, setTitleText, throwErrorStatus} from "./store/actions";
 
 
 export function getTodoList() {
@@ -13,7 +13,7 @@ export function getTodoList() {
     .catch(e => console.log(e));
 }
 
-export async function getTodos() {
+export function getTodos() {
   const axiosResponse = () => {
     return axios.get('http://localhost:3000/todos')
   };
@@ -43,6 +43,29 @@ export function addNewTodo() {
     this.setState({
       isError: true
     });
+  }
+}
+
+export function createNewTodo() {
+  const newTodo = {
+    title: this.props.newTodoTitleValue,
+    checked: false,
+  };
+
+  function axiosResponse() {
+    return axios.post('http://localhost:3000/todos', newTodo)
+  }
+
+  if (this.props.newTodoTitleValue) {
+    axiosResponse()
+      .then(() => {
+        reduxStore.dispatch(setTitleText(''))
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  } else {
+     reduxStore.dispatch(throwErrorStatus(true))
   }
 }
 
