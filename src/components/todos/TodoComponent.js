@@ -8,6 +8,8 @@ import Typography from "@material-ui/core/Typography";
 import Check from "@material-ui/icons/Check";
 import IconButton from '@material-ui/core/IconButton';
 import {removeTodo, checkTodo, changeTodoTitle} from "../../api";
+import {connect} from "react-redux";
+import {changeTitleText, setTitleInputStatus} from "../../store/actions";
 
 function TodoComponent(props) {
 	const [newTitle, setNewTitle] = React.useState(props.title);
@@ -23,13 +25,16 @@ function TodoComponent(props) {
 
 	const onClickShowInput = () => {
 		setIsShowInput(true);
+		props.setTitleInputStatus(true);
 	};
 
 	const onChangeInput = (event) => {
+		props.changeTitleText(event.target.value);
 		setNewTitle(event.target.value);
 	};
 
 	const onCLickSaveTitle = () => {
+		props.setTitleInputStatus(false);
 		changeTodoTitle(props, setIsShowInput, newTitle);
 	};
 
@@ -89,4 +94,16 @@ function TodoComponent(props) {
 	);
 }
 
-export default TodoComponent;
+const mapStateToProps = (state) => {
+	return {
+		newTitle: state.newTitle,
+		showInputStatus: state.showInputStatus
+	};
+};
+
+const mapDispatchToProps = {
+	setTitleInputStatus,
+	changeTitleText
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoComponent);
