@@ -59,7 +59,8 @@ export function createNewTodo() {
   if (this.props.newTodoTitleValue) {
     axiosResponse()
       .then(() => {
-        reduxStore.dispatch(setTitleText(''))
+        reduxStore.dispatch(setTitleText(''));
+        getTodos()
       })
       .catch(e => {
         console.log(e);
