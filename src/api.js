@@ -90,7 +90,7 @@ export function removeTodo(todo) {
     });
 }
 
-export function checkTodo(todo, e) {
+export function check(todo, e) {
   // props.onCheckTodo(props.id, event.target.checked);
   const checkTodo = {
     title: todo.title,
@@ -100,6 +100,25 @@ export function checkTodo(todo, e) {
   axios.put(`http://localhost:3000/todos/${todo.id}`, checkTodo)
     .then(() => todo.loadTodos())
     .catch(e => console.log(e))
+}
+
+export function checkTodo(todo, event) {
+  const checkTodo = {
+    title: todo.title,
+    checked: event.target.checked
+  };
+
+  function axiosResponse() {
+    return axios.put(`http://localhost:3000/todos/${todo.id}`, checkTodo)
+  }
+
+  axiosResponse()
+    .then(() => {
+      getTodos()
+    })
+    .catch(e => {
+      console.log(e);
+    })
 }
 
 export function changeTodoTitle(todo, setIsShowInput, newTitle) {

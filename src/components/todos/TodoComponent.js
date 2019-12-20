@@ -7,7 +7,7 @@ import Input from "@material-ui/core/Input";
 import Typography from "@material-ui/core/Typography";
 import Check from "@material-ui/icons/Check";
 import IconButton from '@material-ui/core/IconButton';
-import {checkTodo, changeTodoTitle, deletet, removeTodo} from "../../api";
+import {checkTodo, changeTodoTitle, deletet, removeTodo, check} from "../../api";
 import {connect} from "react-redux";
 import {changeTitleText, setTitleInputStatus} from "../../store/actions";
 
@@ -16,6 +16,7 @@ function TodoComponent(props) {
 	const [isShowInput, setIsShowInput] = React.useState(false);
 	
 	const handleChange = event => {
+		check(props, event);
 		checkTodo(props, event);
 	};
 
