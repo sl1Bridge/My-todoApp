@@ -9,10 +9,6 @@ import { connect } from 'react-redux';
 import imgUrl from '../../img/backImg.png';
 
 class MainComponent extends React.Component {
-	constructor(props) {
-		super(props);
-	}
-
 	componentDidMount() {
 		getTodos();
 	}

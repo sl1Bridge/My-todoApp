@@ -1,11 +1,12 @@
 import axios from "axios";
 import {reduxStore} from "./index";
-import {loadTodoList, setTitleInputStatus, setTitleText, throwErrorStatus} from "./store/actions";
+import {loadTodoList, setTitleText, throwErrorStatus} from "./store/actions";
 
+const apiURL = 'http://localhost:3000';
 
 export function getTodos() {
   const axiosResponse = () => {
-    return axios.get('http://localhost:3000/todos')
+    return axios.get(`${apiURL}/todos`)
   };
 
   axiosResponse().then(({data}) => {
@@ -20,7 +21,7 @@ export function createNewTodo(props) {
   };
 
   function axiosResponse() {
-    return axios.post('http://localhost:3000/todos', newTodo)
+    return axios.post(`${apiURL}/todos`, newTodo)
   }
 
   if (props.newTodoTitleValue) {
@@ -39,7 +40,7 @@ export function createNewTodo(props) {
 
 export function removeTodo(todo) {
   function axiosResponse() {
-   return axios.delete(`http://localhost:3000/todos/${todo.id}`)
+   return axios.delete(`${apiURL}/todos/${todo.id}`)
   }
 
   axiosResponse()
@@ -58,7 +59,7 @@ export function checkTodo(todo, event) {
   };
 
   function axiosResponse() {
-    return axios.put(`http://localhost:3000/todos/${todo.id}`, checkTodo)
+    return axios.put(`${apiURL}/todos/${todo.id}`, checkTodo)
   }
 
   axiosResponse()
@@ -77,7 +78,7 @@ export function changeTodoTitle(todo, setIsShowInput, newTitle) {
   };
 
   function axiosResponse() {
-    return axios.put(`http://localhost:3000/todos/${todo.id}`, changeTitle)
+    return axios.put(`${apiURL}/todos/${todo.id}`, changeTitle)
   }
 
   axiosResponse()

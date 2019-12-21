@@ -12,6 +12,8 @@ import {checkTodo, changeTodoTitle, removeTodo} from "../../api";
 function TodoComponent(props) {
 	const [newTitle, setNewTitle] = React.useState(props.title);
 	const [isShowInput, setIsShowInput] = React.useState(false);
+
+	const {checked, title} = props;
 	
 	const handleChange = event => {
 		checkTodo(props, event);
@@ -46,7 +48,7 @@ function TodoComponent(props) {
 			      container
 			      alignItems="center"
 			>
-				<Checkbox checked={props.checked}
+				<Checkbox checked={checked}
 				          onChange={handleChange}
 									disabled={isShowInput}
 				/>
@@ -59,11 +61,11 @@ function TodoComponent(props) {
 				{!isShowInput &&
 					<Typography variant="h5"
 				            classes={{
-				            	root: props.checked ? 'line' : 'defaultText'
+				            	root: checked ? 'line' : 'defaultText'
 				            }}
 				            onClick={onClickShowInput}
 					>
-					{props.title}
+					{title}
 				</Typography>}
 				{isShowInput &&
 					<Input value={newTitle}
