@@ -14,26 +14,26 @@ class MainComponent extends React.Component {
 	constructor(props) {
 		super(props);
 		//создаем хранилище
-		this.state = {
+/*		this.state = {
 			listTodo: []
-			/*
+			/!*
 			* id: string
 			* title: string
 			* checked: boolean
-			* */
+			* *!/
 		};
 		// определяем контекст вызова функций
-		this.loadTodos = this.loadTodos.bind(this);
+		this.loadTodos = this.loadTodos.bind(this);*/
 	}
 
 	componentDidMount() {
 		getTodos();
-		getTodoList.bind(this)()
+/*		getTodoList.bind(this)()*/
 	}
 
-	loadTodos() {
+/*	loadTodos() {
 		getTodoList.bind(this)()
-	}
+	}*/
 
 	render() {
 		return (
@@ -44,15 +44,16 @@ class MainComponent extends React.Component {
 				      xs={4}
 				>
 					<Paper>
-						<AddTodoComponent loadTodos={this.loadTodos}/>
+						<AddTodoComponent /*loadTodos={this.loadTodos}*//>
 						<div style={{
 								background: `url(${imgUrl}) no-repeat left top`,
 								backgroundSize: '100% auto',
 								minHeight: '300px'
 							 }}
 						>
-							<TodoListComponent listTodo={this.state.listTodo}
-							                   loadTodos={this.loadTodos}
+							<TodoListComponent /*listTodo={this.state.listTodo}*/
+							                   /*loadTodos={this.loadTodos}*/
+																	listTodo={this.props.listTodo}
 							/>
 						</div>
 					</Paper>

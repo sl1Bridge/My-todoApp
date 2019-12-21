@@ -46,9 +46,9 @@ export function addNewTodo() {
   }
 }
 
-export function createNewTodo() {
+export function createNewTodo(props) {
   const newTodo = {
-    title: this.props.newTodoTitleValue,
+    title: props.newTodoTitleValue,
     checked: false,
   };
 
@@ -56,7 +56,7 @@ export function createNewTodo() {
     return axios.post('http://localhost:3000/todos', newTodo)
   }
 
-  if (this.props.newTodoTitleValue) {
+  if (props.newTodoTitleValue) {
     axiosResponse()
       .then(() => {
         reduxStore.dispatch(setTitleText(''));

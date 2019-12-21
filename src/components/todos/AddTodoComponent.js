@@ -9,10 +9,10 @@ import {setTitleText, throwErrorStatus} from "../../store/actions";
 class AddTodoComponent extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {
+/*		this.state = {
 			titleValue: '',
 			isError: false
-		};
+		};*/
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
@@ -21,16 +21,16 @@ class AddTodoComponent extends React.Component {
 		event.preventDefault();
 		this.props.setTitleText(event.target.value);
 		this.props.throwErrorStatus(false);
-		this.setState({
+/*		this.setState({
 			titleValue: event.target.value,
 			isError: false
-		});
+		});*/
 	}
 
 	handleSubmit(event) {
 		event.preventDefault();
-		addNewTodo.bind(this)();
-		createNewTodo.bind(this)();
+/*		addNewTodo.bind(this)();*/
+		createNewTodo(this.props);
 	}
 
 	render() {
@@ -46,9 +46,11 @@ class AddTodoComponent extends React.Component {
 					      xs={9}
 					>
 						<TextField label="Title"
-						           value={this.state.titleValue}
+						           /*value={this.state.titleValue}*/
+												value={this.props.newTodoTitleValue}
 						           onChange={this.handleChange}
-						           error={this.state.isError}
+						           /*error={this.state.isError}*/
+											 error={this.props.errorStatus}
 						           fullWidth
 						/>
 					</Grid>
