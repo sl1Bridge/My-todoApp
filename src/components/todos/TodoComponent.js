@@ -28,7 +28,7 @@ function TodoComponent(props) {
 	};
 
 	const onChangeInput = (event) => {
-		setNewTitle(event.target.value, setIsShowInput, newTitle);
+		setNewTitle(event.target.value);
 	};
 
 	const onCLickSaveTitle = () => {
