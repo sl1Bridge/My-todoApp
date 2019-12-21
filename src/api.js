@@ -70,9 +70,9 @@ export function checkTodo(todo, event) {
     })
 }
 
-export function changeTodoTitle(todo) {
+export function changeTodoTitle(todo, setIsShowInput, newTitle) {
   const changeTitle = {
-    title: todo.newTitle,
+    title: newTitle,
     checked: todo.checked,
   };
 
@@ -83,7 +83,7 @@ export function changeTodoTitle(todo) {
   axiosResponse()
     .then(() =>{
       getTodos();
-      reduxStore.dispatch(setTitleInputStatus(false));
+      setIsShowInput(false);
     })
     .catch(
       e => console.log(e)

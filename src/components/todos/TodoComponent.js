@@ -8,10 +8,10 @@ import Typography from "@material-ui/core/Typography";
 import Check from "@material-ui/icons/Check";
 import IconButton from '@material-ui/core/IconButton';
 import {checkTodo, changeTodoTitle, removeTodo} from "../../api";
-import {connect} from "react-redux";
-import {changeTitleText, setTitleInputStatus} from "../../store/actions";
 
 function TodoComponent(props) {
+	const [newTitle, setNewTitle] = React.useState(props.title);
+	const [isShowInput, setIsShowInput] = React.useState(false);
 	
 	const handleChange = event => {
 		checkTodo(props, event);
@@ -22,15 +22,15 @@ function TodoComponent(props) {
 	};
 
 	const onClickShowInput = () => {
-		props.setTitleInputStatus(true);
+		setIsShowInput(true);
 	};
 
 	const onChangeInput = (event) => {
-		props.changeTitleText(event.target.value);
+		setNewTitle(event.target.value, setIsShowInput, newTitle);
 	};
 
 	const onCLickSaveTitle = () => {
-		changeTodoTitle(props);
+		changeTodoTitle(props, setIsShowInput, newTitle);
 	};
 
 	return (
@@ -48,7 +48,7 @@ function TodoComponent(props) {
 			>
 				<Checkbox checked={props.checked}
 				          onChange={handleChange}
-									disabled={props.showInputStatus}
+									disabled={isShowInput}
 				/>
 			</Grid>
 			<Grid item
@@ -56,7 +56,7 @@ function TodoComponent(props) {
 			      container
 			      alignItems="center"
 			>
-				{!props.showInputStatus &&
+				{!isShowInput &&
 					<Typography variant="h5"
 				            classes={{
 				            	root: props.checked ? 'line' : 'defaultText'
@@ -65,8 +65,8 @@ function TodoComponent(props) {
 					>
 					{props.title}
 				</Typography>}
-				{props.showInputStatus &&
-					<Input value={props.newTitle}
+				{isShowInput &&
+					<Input value={newTitle}
 						   onChange={onChangeInput}
 						   endAdornment={
 						   		<IconButton onClick={onCLickSaveTitle}>
@@ -80,7 +80,7 @@ function TodoComponent(props) {
 			      xs={3}
 			>
 				<Fab onClick={handleClick}
-					 disabled={props.showInputStatus}
+					 disabled={isShowInput}
 				>
 					<Close />
 				</Fab>
@@ -89,16 +89,4 @@ function TodoComponent(props) {
 	);
 }
 
-const mapStateToProps = (state) => {
-	return {
-		newTitle: state.newTitle,
-		showInputStatus: state.showInputStatus
-	};
-};
-
-const mapDispatchToProps = {
-	setTitleInputStatus,
-	changeTitleText
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(TodoComponent);
+export default TodoComponent;
