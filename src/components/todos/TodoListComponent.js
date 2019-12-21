@@ -2,7 +2,7 @@ import React from 'react';
 import Grid from "@material-ui/core/Grid";
 import TodoComponent from "./TodoComponent";
 
-function TodoListComponent(props) {
+const TodoListComponent = (props) =>  {
 	const {listTodo} = props;
 	return (
 		<Grid container
@@ -20,6 +20,6 @@ function TodoListComponent(props) {
 			))}
 		</Grid>
 	);
-}
+};
 
 export default TodoListComponent;

@@ -9,7 +9,7 @@ import Check from "@material-ui/icons/Check";
 import IconButton from '@material-ui/core/IconButton';
 import {checkTodo, changeTodoTitle, removeTodo} from "../../api";
 
-function TodoComponent(props) {
+const TodoComponent = (props) => {
 	const {checked, title, id} = props;
 
 	const [newTitle, setNewTitle] = React.useState(title);
@@ -69,6 +69,6 @@ function TodoComponent(props) {
 			</Grid>
 		</Grid>
 	);
-}
+};
 
 export default TodoComponent;
