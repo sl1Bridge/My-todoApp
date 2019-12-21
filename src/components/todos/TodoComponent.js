@@ -10,30 +10,10 @@ import IconButton from '@material-ui/core/IconButton';
 import {checkTodo, changeTodoTitle, removeTodo} from "../../api";
 
 function TodoComponent(props) {
-	const [newTitle, setNewTitle] = React.useState(props.title);
+	const {checked, title, id} = props;
+
+	const [newTitle, setNewTitle] = React.useState(title);
 	const [isShowInput, setIsShowInput] = React.useState(false);
-
-	const {checked, title} = props;
-	
-	const handleChange = event => {
-		checkTodo(props, event);
-	};
-
-	const handleClick = () => {
-		removeTodo(props);
-	};
-
-	const onClickShowInput = () => {
-		setIsShowInput(true);
-	};
-
-	const onChangeInput = (event) => {
-		setNewTitle(event.target.value);
-	};
-
-	const onCLickSaveTitle = () => {
-		changeTodoTitle(props, setIsShowInput, newTitle);
-	};
 
 	return (
 		<Grid item
@@ -49,7 +29,7 @@ function TodoComponent(props) {
 			      alignItems="center"
 			>
 				<Checkbox checked={checked}
-				          onChange={handleChange}
+				          onChange={(event) => checkTodo(title, id, event.target.checked)}
 									disabled={isShowInput}
 				/>
 			</Grid>
@@ -63,15 +43,15 @@ function TodoComponent(props) {
 				            classes={{
 				            	root: checked ? 'line' : 'defaultText'
 				            }}
-				            onClick={onClickShowInput}
+				            onClick={() => setIsShowInput(true)}
 					>
 					{title}
 				</Typography>}
 				{isShowInput &&
 					<Input value={newTitle}
-						   onChange={onChangeInput}
+						   onChange={(event) => setNewTitle(event.target.value)}
 						   endAdornment={
-						   		<IconButton onClick={onCLickSaveTitle}>
+						   		<IconButton onClick={() => changeTodoTitle(checked, id, setIsShowInput, newTitle)}>
 						   			<Check />
 						   		</IconButton>
 						   }
@@ -81,7 +61,7 @@ function TodoComponent(props) {
 			<Grid item
 			      xs={3}
 			>
-				<Fab onClick={handleClick}
+				<Fab onClick={() => removeTodo(id)}
 					 disabled={isShowInput}
 				>
 					<Close />

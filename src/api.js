@@ -14,9 +14,9 @@ export function getTodos() {
   })
 }
 
-export function createNewTodo(props) {
+export function createNewTodo(todoTitle) {
   const newTodo = {
-    title: props.newTodoTitleValue,
+    title: todoTitle,
     checked: false,
   };
 
@@ -24,7 +24,7 @@ export function createNewTodo(props) {
     return axios.post(`${apiURL}/todos`, newTodo)
   }
 
-  if (props.newTodoTitleValue) {
+  if (todoTitle) {
     axiosResponse()
       .then(() => {
         reduxStore.dispatch(setTitleText(''));
@@ -38,9 +38,9 @@ export function createNewTodo(props) {
   }
 }
 
-export function removeTodo(todo) {
+export function removeTodo(todoId) {
   function axiosResponse() {
-   return axios.delete(`${apiURL}/todos/${todo.id}`)
+    return axios.delete(`${apiURL}/todos/${todoId}`)
   }
 
   axiosResponse()
@@ -52,14 +52,14 @@ export function removeTodo(todo) {
     });
 }
 
-export function checkTodo(todo, event) {
+export function checkTodo(todoTitle, todoId, checked) {
   const checkTodo = {
-    title: todo.title,
-    checked: event.target.checked
+    title: todoTitle,
+    checked: checked,
   };
 
   function axiosResponse() {
-    return axios.put(`${apiURL}/todos/${todo.id}`, checkTodo)
+    return axios.put(`${apiURL}/todos/${todoId}`, checkTodo)
   }
 
   axiosResponse()
@@ -71,14 +71,14 @@ export function checkTodo(todo, event) {
     })
 }
 
-export function changeTodoTitle(todo, setIsShowInput, newTitle) {
+export function changeTodoTitle(todoStatus, todoId, setIsShowInput, newTitle) {
   const changeTitle = {
     title: newTitle,
-    checked: todo.checked,
+    checked: todoStatus,
   };
 
   function axiosResponse() {
-    return axios.put(`${apiURL}/todos/${todo.id}`, changeTitle)
+    return axios.put(`${apiURL}/todos/${todoId}`, changeTitle)
   }
 
   axiosResponse()

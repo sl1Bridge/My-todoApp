@@ -7,26 +7,12 @@ import {connect} from "react-redux";
 import {setTitleText, throwErrorStatus} from "../../store/actions";
 
 class AddTodoComponent extends React.Component {
-	constructor(props) {
-		super(props);
-		this.handleChange = this.handleChange.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
-	}
-
-	handleChange(event) {
-		event.preventDefault();
-		this.props.setTitleText(event.target.value);
-		this.props.throwErrorStatus(false);
-	}
-
-	handleSubmit(event) {
-		event.preventDefault();
-		createNewTodo(this.props);
-	}
-
 	render() {
 		return (
-			<form onSubmit={this.handleSubmit}>
+			<form onSubmit={(event) => {
+				event.preventDefault();
+				createNewTodo(this.props.newTodoTitleValue);
+			}}>
 				<Grid container
 				      spacing={8}
 				      classes={{
@@ -38,7 +24,11 @@ class AddTodoComponent extends React.Component {
 					>
 						<TextField label="Title"
 												value={this.props.newTodoTitleValue}
-						           onChange={this.handleChange}
+						           onChange={(event) => {
+													event.preventDefault();
+												 this.props.setTitleText(event.target.value);
+												 this.props.throwErrorStatus(false)
+						           	}}
 											 error={this.props.errorStatus}
 						           fullWidth
 						/>
