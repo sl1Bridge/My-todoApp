@@ -7,36 +7,29 @@ import Input from "@material-ui/core/Input";
 import Typography from "@material-ui/core/Typography";
 import Check from "@material-ui/icons/Check";
 import IconButton from '@material-ui/core/IconButton';
-import {checkTodo, changeTodoTitle, deletet, removeTodo, check, changeTitle} from "../../api";
+import {checkTodo, changeTodoTitle, removeTodo} from "../../api";
 import {connect} from "react-redux";
 import {changeTitleText, setTitleInputStatus} from "../../store/actions";
 
 function TodoComponent(props) {
-/*	const [title, setNewTitle] = React.useState(props.title);
-	const [isShowInput, setIsShowInput] = React.useState(false);*/
 	
 	const handleChange = event => {
-		/*check(props, event);*/
 		checkTodo(props, event);
 	};
 
 	const handleClick = () => {
-		/*deletet(props);*/
 		removeTodo(props);
 	};
 
 	const onClickShowInput = () => {
-		/*setIsShowInput(true);*/
 		props.setTitleInputStatus(true);
 	};
 
 	const onChangeInput = (event) => {
 		props.changeTitleText(event.target.value);
-		/*setNewTitle(event.target.value);*/
 	};
 
 	const onCLickSaveTitle = () => {
-		/*changeTitle(props, setIsShowInput, title);*/
 		changeTodoTitle(props);
 	};
 
@@ -55,7 +48,6 @@ function TodoComponent(props) {
 			>
 				<Checkbox checked={props.checked}
 				          onChange={handleChange}
-				          /*disabled={isShowInput}*/
 									disabled={props.showInputStatus}
 				/>
 			</Grid>
@@ -74,8 +66,7 @@ function TodoComponent(props) {
 					{props.title}
 				</Typography>}
 				{props.showInputStatus &&
-					<Input /*value={title}*/
-								value={props.newTitle}
+					<Input value={props.newTitle}
 						   onChange={onChangeInput}
 						   endAdornment={
 						   		<IconButton onClick={onCLickSaveTitle}>

@@ -2,17 +2,13 @@ import React from 'react';
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import {addNewTodo, createNewTodo} from "../../api";
+import {createNewTodo} from "../../api";
 import {connect} from "react-redux";
 import {setTitleText, throwErrorStatus} from "../../store/actions";
 
 class AddTodoComponent extends React.Component {
 	constructor(props) {
 		super(props);
-/*		this.state = {
-			titleValue: '',
-			isError: false
-		};*/
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
@@ -21,15 +17,10 @@ class AddTodoComponent extends React.Component {
 		event.preventDefault();
 		this.props.setTitleText(event.target.value);
 		this.props.throwErrorStatus(false);
-/*		this.setState({
-			titleValue: event.target.value,
-			isError: false
-		});*/
 	}
 
 	handleSubmit(event) {
 		event.preventDefault();
-/*		addNewTodo.bind(this)();*/
 		createNewTodo(this.props);
 	}
 
@@ -46,10 +37,8 @@ class AddTodoComponent extends React.Component {
 					      xs={9}
 					>
 						<TextField label="Title"
-						           /*value={this.state.titleValue}*/
 												value={this.props.newTodoTitleValue}
 						           onChange={this.handleChange}
-						           /*error={this.state.isError}*/
 											 error={this.props.errorStatus}
 						           fullWidth
 						/>
