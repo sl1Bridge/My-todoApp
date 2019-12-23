@@ -2,9 +2,10 @@ import React from 'react';
 
 import HeaderTodoComponent from "./header/HeaderTodoComponent";
 import MainComponent from "./todos/MainComponent";
+import MainFooterComponent from "./footer/MainFooterComponent";
 
 import '../css/styles.css';
-import MainFooterComponent from "./footer/MainFooterComponent";
+
 
 const App = () => {
   return (
