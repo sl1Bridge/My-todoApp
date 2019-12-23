@@ -7,8 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
 
 
-// КОМПОНЕНТ ОТВЕЧАЮЩИЙ ЗА ХИДЕР
-function HeaderTodoComponent() {
+const HeaderTodoComponent = () => {
 	return (
 		<AppBar position="static">
 			<Toolbar>
@@ -51,6 +50,6 @@ function HeaderTodoComponent() {
 			</Toolbar>
 		</AppBar>
 	);
-}
+};
 
 export default HeaderTodoComponent;
