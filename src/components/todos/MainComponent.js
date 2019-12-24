@@ -26,7 +26,8 @@ class MainComponent extends React.Component {
 						<div style={{
 								background: `url(${imgUrl}) no-repeat left top`,
 								backgroundSize: '100% auto',
-								minHeight: '300px'
+								minHeight: '300px',
+								marginBottom: '80px'
 							 }}
 						>
 							<TodoListComponent	listTodo={this.props.listTodo}
