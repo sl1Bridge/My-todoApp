@@ -116,10 +116,28 @@ p {
 }
 
 .about-me-container p {
-    font-size: 20px;
+    font-size: 16px;
     font-family: Arial, sans-serif;
     text-transform: uppercase;
-    font-weight: bold;
     margin: 25px 0;
-    text-align: center;
+}
+
+.about-me-container p > span {
+    font-weight: bold;
+}
+
+.about-me-container > h2 {
+    margin: 10px 10px;
+}
+
+.about-me-container .information-container {
+    margin: 10px 10px;
+    padding: 7px 20px 7px 20px;
+    background-color: whitesmoke;
+    height: auto;
+    min-height: 300px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px grey;
+    text-transform: none;
+    text-indent: 16px;
 }

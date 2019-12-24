@@ -28,12 +28,13 @@ const AboutMeComponent = () => {
         />
         </div>
         <div>
-          <p>First Name: {firstName || "Vasya"}</p>
-          <p>Second Name: {secondName || "Nebivalyi"}</p>
-          <p>Years Old: {yearsOld || "47"}</p>
+          <p><span>First Name:</span> {firstName || "Vasya"}</p>
+          <p><span>Second Name:</span> {secondName || "Nebivalyi"}</p>
+          <p><span>Years Old:</span> {yearsOld || "47"}</p>
         </div>
       </div>
-        <p>Information: {information || "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, numquam."}</p>
+      <h2>Information:</h2>
+      <p className={"information-container"}>{information || "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet dicta officiis porro tempora veritatis! Accusamus aliquam facilis, ipsum laudantium libero optio quaerat recusandae vitae voluptates!"}</p>
     </div>
   )
 };
