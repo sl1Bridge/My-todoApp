@@ -20,6 +20,9 @@ const MainComponent = (props) => {
 			>
 				<Grid item
 				      xs={4}
+							classes={{
+								root: 'todo-list'
+							}}
 				>
 					<Paper>
 						<AddTodoComponent />
