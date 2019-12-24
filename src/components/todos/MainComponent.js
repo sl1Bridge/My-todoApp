@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import AddTodoComponent from "./AddTodoComponent";
@@ -8,12 +8,12 @@ import { connect } from 'react-redux';
 
 import imgUrl from '../../img/backImg.png';
 
-class MainComponent extends React.Component {
-	componentDidMount() {
-		getTodos();
-	}
+const MainComponent = (props) => {
 
-	render() {
+	useEffect(() => {
+		getTodos();
+	},[]);
+
 		return (
 			<Grid container
 			      justify="center"
@@ -30,15 +30,14 @@ class MainComponent extends React.Component {
 								marginBottom: '80px'
 							 }}
 						>
-							<TodoListComponent	listTodo={this.props.listTodo}
+							<TodoListComponent	listTodo={props.listTodo}
 							/>
 						</div>
 					</Paper>
 				</Grid>
 			</Grid>
 		);
-	}
-}
+};
 
 const mapStateToProps = (state) => {
 	return {

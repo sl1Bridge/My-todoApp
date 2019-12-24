@@ -1,11 +1,16 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const MainFooterComponent = () => {
   return (
     <div className={"footer-container"}>
       <ul>
-        <li><a href="/">Todo list</a></li>
-        <li><a href="/">About me</a></li>
+          <li>
+            <Link to="/list">Todo list</Link>
+          </li>
+          <li>
+            <Link to="/about">About me</Link>
+          </li>
       </ul>
     </div>
   );

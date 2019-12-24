@@ -64,6 +64,7 @@ body {
     border: 1px solid black;
     padding: 7px 100px;
     font-size: 20px;
+    font-family: Arial, sans-serif;
     text-transform: uppercase;
 }
 
@@ -78,4 +79,10 @@ body {
 
 .footer-container > ul li a:hover {
     text-decoration: underline;
+}
+
+/* AboutMe styles */
+
+.about-me-container {
+
 }
