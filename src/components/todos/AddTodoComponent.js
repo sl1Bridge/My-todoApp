@@ -2,16 +2,13 @@ import React from 'react';
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import {createNewTodo} from "../../api";
 import {connect} from "react-redux";
-import {setTitleText, throwErrorStatus} from "../../store/actions";
+import {addTodoToList, changeTitleText, loadTodoListAction, setTitleText, throwErrorStatus} from "../../store/actions";
 
-const AddTodoComponent = (props) => {
+const AddTodoComponent = ({newTodoTitleValue, errorStatus, onInputChange, onAddBtnClick}) => {
 	return (
-		<form onSubmit={(event) => {
-			event.preventDefault();
-			createNewTodo(props.newTodoTitleValue);
-		}}>
+		<form onSubmit={(event) => {event.preventDefault();
+																onAddBtnClick(newTodoTitleValue)}}>
 			<Grid container
 						spacing={8}
 						classes={{
@@ -22,13 +19,9 @@ const AddTodoComponent = (props) => {
 							xs={9}
 				>
 					<TextField label="Title"
-											value={props.newTodoTitleValue}
-										 onChange={(event) => {
-												event.preventDefault();
-											 props.setTitleText(event.target.value);
-											 props.throwErrorStatus(false)
-											}}
-										 error={props.errorStatus}
+											value={newTodoTitleValue}
+										 onChange={(event) => onInputChange(event)}
+										 error={errorStatus}
 										 fullWidth
 					/>
 				</Grid>
@@ -57,9 +50,9 @@ const mapStateToProps = (state) => {
 	}
 };
 
-const mapDispatchToProps = {
-	setTitleText,
-	throwErrorStatus
-};
+const mapDispatchToProps = (dispatch) => ({
+	onInputChange: (event) => dispatch(changeTitleText(event.target.value, false)),
+	onAddBtnClick: (newTodoTitleValue) => dispatch(addTodoToList(newTodoTitleValue, () => loadTodoListAction())),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddTodoComponent);

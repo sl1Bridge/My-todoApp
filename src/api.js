@@ -42,6 +42,15 @@ export function createNewTodo(todoTitle) {
   }
 }
 
+export function addNewTodo(todoTitle) {
+  const newTodo = {
+    title: todoTitle,
+    checked: false,
+  };
+
+  return axios.post(`${apiURL}/todos`, newTodo)
+}
+
 export function removeTodo(todoId) {
   function axiosResponse() {
     return axios.delete(`${apiURL}/todos/${todoId}`)
