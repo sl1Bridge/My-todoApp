@@ -3,16 +3,14 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import AddTodoComponent from "./AddTodoComponent";
 import TodoListComponent from "./TodoListComponent";
-import { getTodos } from "../../api";
 import { connect } from 'react-redux';
 
 import imgUrl from '../../img/backImg.png';
+import {loadTodoListAction} from "../../store/actions";
 
-const MainComponent = (props) => {
+const MainComponent = ({onScreenLoad, listTodo}) => {
 
-	useEffect(() => {
-		getTodos();
-	},[]);
+	useEffect(() => {onScreenLoad()},[onScreenLoad]);
 
 		return (
 			<Grid container
@@ -33,7 +31,7 @@ const MainComponent = (props) => {
 								marginBottom: '80px'
 							 }}
 						>
-							<TodoListComponent	listTodo={props.listTodo}
+							<TodoListComponent	listTodo={listTodo}
 							/>
 						</div>
 					</Paper>
@@ -48,4 +46,8 @@ const mapStateToProps = (state) => {
 	}
 };
 
-export default connect(mapStateToProps)(MainComponent);
+const mapDispatchToProps = (dispatch) => ({
+		onScreenLoad: () => dispatch(loadTodoListAction()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainComponent);

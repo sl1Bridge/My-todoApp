@@ -14,6 +14,10 @@ export function getTodos() {
   })
 }
 
+export function loadTodos() {
+  return axios.get(`${apiURL}/todos`)
+}
+
 export function createNewTodo(todoTitle) {
   const newTodo = {
     title: todoTitle,

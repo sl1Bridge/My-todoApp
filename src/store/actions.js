@@ -1,3 +1,5 @@
+import { loadTodos } from '../api';
+
 export const ACTION_TODO_LIST_LOADED = 'ACTION_TODO_LIST_LOADED';
 export const ACTION_NEW_TODO_ERROR_THROW = 'ACTION_NEW_TODO_ERROR_THROW';
 export const ACTION_NEW_TODO_NAME_CHANGED = 'ACTION_NEW_TODO_NAME_CHANGED';
@@ -22,3 +24,12 @@ export const setTitleText = (text) => {
     payload: text
   }
 };
+
+export const loadTodoListAction = () => (
+  (dispatch) => loadTodos().then(({data}) => dispatch(
+    {
+      type: ACTION_TODO_LIST_LOADED,
+      payload: data
+    }
+  )).catch((e) => console.log(e))
+);
