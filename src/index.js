@@ -9,7 +9,7 @@ import App from './components/App';
 import {rootReducer} from "./store/reducers";
 import * as serviceWorker from './serviceWorker';
 
-export const reduxStore = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
+const reduxStore = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 
 ReactDOM.render(
   <Provider store={reduxStore}>

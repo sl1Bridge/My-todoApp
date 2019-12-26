@@ -3,7 +3,10 @@ import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import {connect} from "react-redux";
-import {addTodoToList, changeTitleText, loadTodoListAction, setTitleText, throwErrorStatus} from "../../store/actions";
+import {
+	addTodoToListAction,
+	changeTitleTextAction,
+} from "../../store/actions";
 
 const AddTodoComponent = ({newTodoTitleValue, errorStatus, onInputChange, onAddBtnClick}) => {
 	return (
@@ -51,8 +54,8 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-	onInputChange: (event) => dispatch(changeTitleText(event.target.value, false)),
-	onAddBtnClick: (newTodoTitleValue) => dispatch(addTodoToList(newTodoTitleValue, () => loadTodoListAction())),
+	onInputChange: (event) => dispatch(changeTitleTextAction(event.target.value, false)),
+	onAddBtnClick: (newTodoTitleValue) => dispatch(addTodoToListAction(newTodoTitleValue)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddTodoComponent);

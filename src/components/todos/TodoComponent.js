@@ -7,10 +7,11 @@ import Input from "@material-ui/core/Input";
 import Typography from "@material-ui/core/Typography";
 import Check from "@material-ui/icons/Check";
 import IconButton from '@material-ui/core/IconButton';
-import {checkTodo, changeTodoTitle, removeTodo} from "../../api";
+import {changeTodoTitleAction, checkTodoAction, removeTodoAction} from "../../store/actions";
+import {connect} from "react-redux";
 
 const TodoComponent = (props) => {
-	const {checked, title, id} = props;
+	const {checked, title, id, onStatusChange, onSaveBtnClick, onRemoveBtnClick} = props;
 
 	const [newTitle, setNewTitle] = React.useState(title);
 	const [isShowInput, setIsShowInput] = React.useState(false);
@@ -29,7 +30,7 @@ const TodoComponent = (props) => {
 			      alignItems="center"
 			>
 				<Checkbox checked={checked}
-				          onChange={(event) => checkTodo(title, id, event.target.checked)}
+				          onChange={(event) => onStatusChange(title, id, event.target.checked)}
 									disabled={isShowInput}
 				/>
 			</Grid>
@@ -51,7 +52,7 @@ const TodoComponent = (props) => {
 					<Input value={newTitle}
 						   onChange={(event) => setNewTitle(event.target.value)}
 						   endAdornment={
-						   		<IconButton onClick={() => changeTodoTitle(checked, id, setIsShowInput, newTitle)}>
+						   		<IconButton onClick={() => onSaveBtnClick(checked, id, setIsShowInput, newTitle)}>
 						   			<Check />
 						   		</IconButton>
 						   }
@@ -61,7 +62,7 @@ const TodoComponent = (props) => {
 			<Grid item
 			      xs={3}
 			>
-				<Fab onClick={() => removeTodo(id)}
+				<Fab onClick={() => onRemoveBtnClick(id)}
 					 disabled={isShowInput}
 				>
 					<Close />
@@ -71,4 +72,12 @@ const TodoComponent = (props) => {
 	);
 };
 
-export default TodoComponent;
+const mapStateToProps = () => ({});
+
+const mapDispatchToProps = (dispatch) => ({
+	onStatusChange: (title, id, checked) => dispatch(checkTodoAction(title, id, checked)),
+	onSaveBtnClick: (checked, id, setIsShowInput, newTitle) => dispatch(changeTodoTitleAction(checked, id, setIsShowInput, newTitle)),
+	onRemoveBtnClick: (id) => dispatch(removeTodoAction(id))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoComponent);
