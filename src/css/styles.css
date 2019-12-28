@@ -94,11 +94,10 @@ p {
 /* AboutMe styles */
 
 .about-me-container {
-    min-width: 545px;
-    max-width: 545px;
+    width: 545px;
     background-color: white;
     margin: 0 auto;
-    height: calc(80vh - 76px);
+    height: calc(100vh - 270px);
     border-radius: 10px;
     box-shadow: 0 0 5px grey;
 }
@@ -113,6 +112,7 @@ p {
     align-items: center;
     justify-content: space-around;
     padding: 15px 5px;
+    margin-bottom: 25px;
 }
 
 .about-me-container p {
@@ -134,8 +134,7 @@ p {
     margin: 10px 10px;
     padding: 7px 20px 7px 20px;
     background-color: whitesmoke;
-    height: auto;
-    min-height: 300px;
+    height: 40%;
     border-radius: 10px;
     box-shadow: 0 0 5px grey;
     text-transform: none;
